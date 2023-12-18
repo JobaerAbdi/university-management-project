@@ -113,6 +113,10 @@ const studentSchema = new Schema<TStudent>({
     type: String,
     enum: ['active', 'blocked'],
   },
-});
+},
+{
+  timestamps: true,
+}
+);
 
 export const Student = model<TStudent>('Student', studentSchema);
