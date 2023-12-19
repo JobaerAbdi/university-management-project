@@ -10,6 +10,7 @@ const userNameSchema = new Schema<TUserName>({
   firstName: {
     type: String,
     required: true,
+    trim: true
   },
   middleName: {
     type: String,
@@ -68,55 +69,68 @@ const localGuardianSchema = new Schema<TLocalGuardian>({
 
 const bloodGroup = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
-const studentSchema = new Schema<TStudent>({
-  id: {
-    type: String,
+const studentSchema = new Schema<TStudent>(
+  {
+    id: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    name: {
+      type: userNameSchema,
+      require: true
+    },
+    dateOfBirth: {
+      type: String,
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female'],
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    contactNo: {
+      type: String,
+      required: true,
+    },
+    emergencyContactNo: {
+      type: String,
+      required: true,
+    },
+    bloodGroup: {
+      type: String,
+      enum: bloodGroup,
+    },
+    presentAddress: {
+      type: String,
+      required: true,
+    },
+    permanentAddress: {
+      type: String,
+      required: true,
+    },
+    guardian: {
+      type: guardianSchema,
+      required: true
+    },
+    localGuardian: {
+      type: localGuardianSchema,
+      required: true
+    },
+    profileImage: {
+      type: String,
+    },
+    isActive: {
+      type: String,
+      enum: ['active', 'blocked'],
+      default: 'active'
+    },
   },
-  name: userNameSchema,
-  dateOfBirth: {
-    type: String,
+  {
+    timestamps: true,
   },
-  gender: {
-    type: String,
-    enum: ['male', 'female'],
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  contactNo: {
-    type: String,
-    required: true,
-  },
-  emergencyContactNo: {
-    type: String,
-    required: true,
-  },
-  bloodGroup: {
-    type: String,
-    enum: bloodGroup,
-  },
-  presentAddress: {
-    type: String,
-    required: true,
-  },
-  permanentAddress: {
-    type: String,
-    required: true,
-  },
-  guardian: guardianSchema,
-  localGuardian: localGuardianSchema,
-  profileImage: {
-    type: String,
-  },
-  isActive: {
-    type: String,
-    enum: ['active', 'blocked'],
-  },
-},
-{
-  timestamps: true,
-}
 );
 
 export const Student = model<TStudent>('Student', studentSchema);
