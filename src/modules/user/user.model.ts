@@ -5,7 +5,7 @@ export const  userSchema = new Schema<TUser>({
     id:{
         type: String,
         required: true,
-        unique: true
+        // unique: true
     },
     password: {
         type: String,
@@ -14,7 +14,7 @@ export const  userSchema = new Schema<TUser>({
     },
     needsPasswordChange: {
         type: Boolean,
-        required: true,
+        default: true,
     },
     role:{
         type: String,
@@ -23,11 +23,15 @@ export const  userSchema = new Schema<TUser>({
     status: {
         type: String,
         enum: ['in-progress' , 'blocked'],
+        default: 'in-progress'
     },
     isDeleted: {
         type: Boolean,
-        required:true,
+        default: false
     },
+},
+{
+    timestamps: true,
 });
 
 export const User = model<TUser>('User', userSchema);
