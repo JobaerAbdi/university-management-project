@@ -1,16 +1,4 @@
-import { TStudent } from './student.interface';
 import { Student } from './student.model';
-
-const createStudentIntoDB = async (payload: TStudent) => {
-  const result = await Student.create(payload);   // => built in static method
-  return result;
-  
-/*
-  const student = new Student(payload)
-  const result = await student.save()  // => built in instance method
-  return result;
-*/
-};
 
 const getAllStudentsFromDB = async () => {
   const result = await Student.find();
@@ -23,7 +11,6 @@ const getSingleStudentFromDB = async (id: string) => {
 };
 
 export const studentServices = {
-  createStudentIntoDB,
   getAllStudentsFromDB,
   getSingleStudentFromDB,
 };

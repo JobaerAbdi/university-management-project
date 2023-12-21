@@ -73,8 +73,14 @@ const studentSchema = new Schema<TStudent>(
   {
     id: {
       type: String,
-      required: true,
+      required: [true, 'Id is required'],
       unique: true
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'User id is required'],
+      unique: true,
+      ref: 'User'
     },
     name: {
       type: userNameSchema,
@@ -122,15 +128,11 @@ const studentSchema = new Schema<TStudent>(
     profileImage: {
       type: String,
     },
-    isActive: {
-      type: String,
-      enum: ['active', 'blocked'],
-      default: 'active'
-    },
   },
   {
     timestamps: true,
   },
 );
+
 
 export const Student = model<TStudent>('Student', studentSchema);
