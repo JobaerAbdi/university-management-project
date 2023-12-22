@@ -1,11 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { RequestHandler } from 'express';
 import { userServices } from './user.service';
 
-const createStudentIntoDB = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const createStudentIntoDB: RequestHandler = async (req, res, next) => {
   try {
     const { password, studentData } = req.body;
     const result = await userServices.createStudentIntoDB(

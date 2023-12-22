@@ -1,11 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { RequestHandler } from 'express';
 import { studentServices } from './student.service';
 
-const getAllStudentsFromDB = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const getAllStudentsFromDB: RequestHandler = async (req, res,next) => {
   try {
     const result = await studentServices.getAllStudentsFromDB();
     res.status(201).json({
@@ -18,11 +14,7 @@ const getAllStudentsFromDB = async (
   }
 };
 
-const getSingleStudentFromDB = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const getSingleStudentFromDB: RequestHandler = async (req, res,next) => {
   try {
     const { studentId } = req.params;
     const result = await studentServices.getSingleStudentFromDB(studentId);
