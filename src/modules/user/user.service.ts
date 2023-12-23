@@ -8,7 +8,7 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
 
     const userData: Partial<TUser> = {};
 
-    userData.id = '2030010002';
+    userData.id = '2030010007';
     userData.password = password || (config.default_password as string); 
     userData.role = 'student';
 
