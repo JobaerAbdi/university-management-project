@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-const userNameSchema = z.object({
+const userNameValidationSchema = z.object({
   firstName: z.string().min(1).max(255),
   middleName: z.string().min(1).max(255).optional(),
   lastName: z.string().min(1).max(255),
 });
 
-const guardianSchema = z.object({
+const guardianValidationSchema = z.object({
   fatherName: z.string().min(1).max(255),
   fatherOccupation: z.string().min(1).max(255),
   fatherContactNo: z.string().min(1).max(20),
@@ -15,7 +15,7 @@ const guardianSchema = z.object({
   motherContactNo: z.string().min(1).max(20),
 });
 
-const localGuardianSchema = z.object({
+const localGuardianValidationSchema = z.object({
   name: z.string().min(1).max(255),
   occupation: z.string().min(1).max(255),
   contactNo: z.string().min(1).max(20),
@@ -35,8 +35,9 @@ const bloodGroupSchema = z.enum([
 
 const createStudentValidationSchema = z.object({
   body: z.object({
+    password: z.string().max(20),
     studentData: z.object({
-      name: userNameSchema,
+      name: userNameValidationSchema,
       dateOfBirth: z.string().optional(),
       gender: z.enum(['male', 'female']).optional(),
       email: z.string().email(),
@@ -45,8 +46,8 @@ const createStudentValidationSchema = z.object({
       bloodGroup: bloodGroupSchema.optional(),
       presentAddress: z.string().min(1).max(500),
       permanentAddress: z.string().min(1).max(500),
-      guardian: guardianSchema,
-      localGuardian: localGuardianSchema,
+      guardian: guardianValidationSchema,
+      localGuardian: localGuardianValidationSchema,
       profileImage: z.string().optional(),
     }),
   }),

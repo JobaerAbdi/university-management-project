@@ -3,6 +3,8 @@ import { TUser } from "./user.interface";
 import bcrypt from 'bcrypt';
 import config from "../../config";
 
+
+
 export const userSchema = new Schema<TUser>({
     id:{
         type: String,
