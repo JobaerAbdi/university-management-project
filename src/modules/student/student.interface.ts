@@ -5,6 +5,9 @@ export type TUserName = {
   middleName: string;
   lastName: string;
 };
+
+export type TGender =  'male' | 'female';
+
 export type TBloodGroup =
   | 'A+'
   | 'A-'
@@ -14,6 +17,7 @@ export type TBloodGroup =
   | 'AB-'
   | 'O+'
   | 'O-';
+
 export type TGuardian = {
   fatherName: string;
   fatherOccupation: string;
@@ -34,7 +38,7 @@ export type TStudent = {
   user: Types.ObjectId;
   name: TUserName;
   dateOfBirth?: string;
-  gender: 'male' | 'female';
+  gender: TGender;
   email: string;
   contactNo: string;
   emergencyContactNo: string;

@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { studentServices } from './student.service';
 
-const getAllStudentsFromDB: RequestHandler = async (req, res,next) => {
+const getAllStudentsFromDB: RequestHandler = async (req, res, next) => {
   try {
     const result = await studentServices.getAllStudentsFromDB();
     res.status(201).json({
