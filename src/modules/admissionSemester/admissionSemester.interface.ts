@@ -24,3 +24,7 @@ export type TAdmissionSemester = {
     startMonth: TAdmissionSemesterMonths;
     endMonth: TAdmissionSemesterMonths
 };
+
+export type TAdmissionSemesterNameCodeMapper = {
+  [key: string]: string;
+};

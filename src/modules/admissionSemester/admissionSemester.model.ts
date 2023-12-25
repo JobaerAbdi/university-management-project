@@ -34,16 +34,19 @@ export const admissionSemesterSchema = new Schema<TAdmissionSemester>(
   },
 );
 
+
 admissionSemesterSchema.pre('save', async function(next){
-  const isSemesterExists = await AdmissionSemester.findOne({
-    year : this.year,
-    name :  this.name
+  const isAdmissionSemesterExists = await AdmissionSemester.findOne({
+    name: this.name,
+    year: this.year
   })
-  if(isSemesterExists){
-    throw new Error('Admission semester is all ready exists!')
+  
+  if(isAdmissionSemesterExists){
+    throw new Error("Admission semester is already exists!")
   }
   next()
 });
+
 
 export const AdmissionSemester = model<TAdmissionSemester>(
   'AdmissionSemester',

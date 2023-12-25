@@ -1,4 +1,4 @@
-import { TAdmissionSemesterCode, TAdmissionSemesterMonths, TAdmissionSemesterName } from "./admissionSemester.interface";
+import { TAdmissionSemesterCode, TAdmissionSemesterMonths, TAdmissionSemesterName, TAdmissionSemesterNameCodeMapper } from "./admissionSemester.interface";
 
 export const names: TAdmissionSemesterName[] = ['Autumn', 'Summer' ,'Fall'];
   
@@ -9,3 +9,12 @@ export const months: TAdmissionSemesterMonths[] =  [
     "May", "June", "July", "August",
     "September", "October", "November", "December"
 ];
+
+
+export const admissionSemesterNameCodeMapper:TAdmissionSemesterNameCodeMapper = {
+    Autumn : '01',
+    Summer : '02',
+    Fall : '03'
+  };
+
+ 
