@@ -16,7 +16,13 @@ const getAllAdmissionSemestersFromDB = async()=>{
 };
 
 
+const getSingleAdmissionSemesterFromDB = async(id: string)=>{
+  const result = await AdmissionSemester.findById(id)
+  return result;
+};
+
 export const admissionSemesterServices = {
   createAdmissionSemesterIntoDB,
   getAllAdmissionSemestersFromDB,
+  getSingleAdmissionSemesterFromDB,
 };

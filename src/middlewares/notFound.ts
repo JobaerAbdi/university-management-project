@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 
 
-const notFound = ((req:Request, res: Response, next: NextFunction)=>{
+const notFound = ((req: Request, res: Response, next: NextFunction)=>{
     const statusCode = httpStatus.NOT_FOUND;
     const message = 'API not found';
     return res.status(statusCode).json({

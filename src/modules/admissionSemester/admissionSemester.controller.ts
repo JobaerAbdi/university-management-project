@@ -28,7 +28,22 @@ const getAllAdmissionSemestersFromDB: RequestHandler = async(req, res, next)=>{
    }
 };
 
+const getSingleAdmissionSemesterFromDB: RequestHandler=async(req, res, next)=>{
+  try {
+    const {semesterId} = req.params
+  const result = await admissionSemesterServices.getSingleAdmissionSemesterFromDB(semesterId)
+  res.status(200).json({
+    success: true,
+    message: 'Admission semester is retrieved successfully',
+    data: result
+  })
+  } catch (error) {
+    next(error)
+  }
+};
+
 export const admissionSemesterControllers = {
   createAdmissionSemesterIntoDB,
-  getAllAdmissionSemestersFromDB
+  getAllAdmissionSemestersFromDB,
+  getSingleAdmissionSemesterFromDB
 };

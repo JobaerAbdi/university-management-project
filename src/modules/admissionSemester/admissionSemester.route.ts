@@ -11,5 +11,7 @@ router.post('/create-admissionSemester',
 
 router.get('/', admissionSemesterControllers.getAllAdmissionSemestersFromDB);
 
+router.get('/:semesterId', admissionSemesterControllers.getSingleAdmissionSemesterFromDB);
+
 export const admissionSemesterRoutes = router;
 
