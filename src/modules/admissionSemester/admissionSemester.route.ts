@@ -13,5 +13,7 @@ router.get('/', admissionSemesterControllers.getAllAdmissionSemestersFromDB);
 
 router.get('/:semesterId', admissionSemesterControllers.getSingleAdmissionSemesterFromDB);
 
+router.patch('/:semesterId', admissionSemesterControllers.updateAdmissionSemesterIntoDB);
+
 export const admissionSemesterRoutes = router;
 

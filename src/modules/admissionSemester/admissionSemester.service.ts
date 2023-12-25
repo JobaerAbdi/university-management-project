@@ -21,8 +21,23 @@ const getSingleAdmissionSemesterFromDB = async(id: string)=>{
   return result;
 };
 
+const updateAdmissionSemesterIntoDB = async(id: string)=>{
+  const result = await AdmissionSemester.findByIdAndUpdate(
+    id, 
+    {$set: 
+      {
+        name: "Fall",
+        code: "03"
+      }
+    },
+    {new: true, runValidators: true}
+  )
+  return result;
+};
+
 export const admissionSemesterServices = {
   createAdmissionSemesterIntoDB,
   getAllAdmissionSemestersFromDB,
   getSingleAdmissionSemesterFromDB,
+  updateAdmissionSemesterIntoDB
 };
