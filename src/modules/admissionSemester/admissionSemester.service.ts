@@ -5,13 +5,18 @@ import { AdmissionSemester } from './admissionSemester.model';
 const createAdmissionSemesterIntoDB = async (payload: TAdmissionSemester) => {
   if(admissionSemesterNameCodeMapper[payload.name] !== payload.code){
     throw new Error("Invalid semester code")
-  };
+  }
+  const result = await AdmissionSemester.create(payload)
+  return result;
+};
 
-  const result = await AdmissionSemester.create(payload);
+const getAllAdmissionSemestersFromDB = async()=>{
+  const result = await AdmissionSemester.find()
   return result;
 };
 
 
 export const admissionSemesterServices = {
   createAdmissionSemesterIntoDB,
+  getAllAdmissionSemestersFromDB,
 };
