@@ -13,7 +13,8 @@ router.get('/', admissionSemesterControllers.getAllAdmissionSemestersFromDB);
 
 router.get('/:semesterId', admissionSemesterControllers.getSingleAdmissionSemesterFromDB);
 
-router.patch('/:semesterId', admissionSemesterControllers.updateAdmissionSemesterIntoDB);
+router.patch('/:semesterId',
+ validateRequest(academicSemesterValidations.updateAdmissionSemesterValidationSchema), admissionSemesterControllers.updateAdmissionSemesterIntoDB);
 
 export const admissionSemesterRoutes = router;
 

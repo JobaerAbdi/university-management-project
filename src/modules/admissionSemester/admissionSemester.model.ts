@@ -4,17 +4,17 @@ import { TAdmissionSemester } from './admissionSemester.interface';
 
 export const admissionSemesterSchema = new Schema<TAdmissionSemester>(
   {
-    name: {
+    semesterName: {
       type: String,
       enum: names,
       required: true,
     },
-    code: {
+    semesterCode: {
       type: String,
       enum: codes,
       required: true,
     },
-    year: {
+    admissionYear: {
       type: String,
       required: true,
     },
@@ -37,8 +37,8 @@ export const admissionSemesterSchema = new Schema<TAdmissionSemester>(
 
 admissionSemesterSchema.pre('save', async function(next){
   const isAdmissionSemesterExists = await AdmissionSemester.findOne({
-    name: this.name,
-    year: this.year
+    semesterName: this.semesterName,
+    admissionYear: this.admissionYear
   })
   
   if(isAdmissionSemesterExists){

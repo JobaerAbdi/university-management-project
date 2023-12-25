@@ -16,5 +16,3 @@ export const admissionSemesterNameCodeMapper:TAdmissionSemesterNameCodeMapper = 
     Summer : '02',
     Fall : '03'
   };
-
- 

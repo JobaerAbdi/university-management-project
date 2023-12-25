@@ -18,9 +18,9 @@ export type TAdmissionSemesterMonths =
 
 
 export type TAdmissionSemester = {
-    name: TAdmissionSemesterName;
-    code: TAdmissionSemesterCode;
-    year: string;
+    semesterName: TAdmissionSemesterName;
+    semesterCode: TAdmissionSemesterCode;
+    admissionYear: string;
     startMonth: TAdmissionSemesterMonths;
     endMonth: TAdmissionSemesterMonths
 };

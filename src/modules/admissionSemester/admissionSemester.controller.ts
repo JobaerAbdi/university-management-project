@@ -45,7 +45,9 @@ const getSingleAdmissionSemesterFromDB: RequestHandler=async(req, res, next)=>{
 const updateAdmissionSemesterIntoDB: RequestHandler = async(req, res, next)=>{
   try {
     const {semesterId} = req.params
-    const result = await admissionSemesterServices.updateAdmissionSemesterIntoDB(semesterId)
+    const {admissionSemesterData} = req.body
+    
+    const result = await admissionSemesterServices.updateAdmissionSemesterIntoDB(semesterId,admissionSemesterData )
     res.status(200).json({
       success: true,
       message: "Admission semester is update successfully",
