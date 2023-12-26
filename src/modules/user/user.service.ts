@@ -1,18 +1,19 @@
 import config from "../../config";
-import { TAdmissionSemester } from "../admissionSemester/admissionSemester.interface";
+import { AdmissionSemester } from "../admissionSemester/admissionSemester.model";
 import { TStudent } from "../student/student.interface";
 import { Student } from "../student/student.model";
 import { TUser } from "./user.interface";
 import { User } from "./user.model";
+import { generateStudentId } from "./user.utils";
 
-const createStudentIntoDB = async (password: string, studentData: TStudent) => {
+const createStudentIntoDB = async (password: string, payload: TStudent) => {
 
     const userData: Partial<TUser> = {};
-    // year +  semesterCode + 4 digitNumber
-    const generateStudentId = (payload: TAdmissionSemester)=>{}
 
+    const admissionSemester = await AdmissionSemester.findById(payload.admissionSemester)
+    
     // userData.id = "2024010001";
-    userData.id = generateStudentId();
+    userData.id = await generateStudentId(admissionSemester);
     userData.password = password || (config.default_password as string);
     userData.role = 'student';
 
@@ -21,10 +22,10 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
     
     
      if(Object.keys(newUser).length){
-        studentData.id = newUser.id; // embedding id
-        studentData.user = newUser._id; // referencing id
+        payload.id = newUser.id; // embedding id
+        payload.user = newUser._id; // referencing id
 
-        const newStudent = await Student.create(studentData)
+        const newStudent = await Student.create(payload)
         return newStudent;
      }
     
