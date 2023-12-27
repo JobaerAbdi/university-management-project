@@ -17,6 +17,8 @@ const createStudentIntoDB: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
+
 export const userControllers = {
   createStudentIntoDB,
 };
