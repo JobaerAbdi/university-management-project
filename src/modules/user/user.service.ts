@@ -11,6 +11,8 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
     const userData: Partial<TUser> = {};
 
     const admissionSemester = await AdmissionSemester.findById(payload.admissionSemester)
+    // const admissionSemester = await AdmissionSemester.findById(payload.admissionSemester)
+    
     
     // userData.id = "2024010001";
     userData.id = await generateStudentId(admissionSemester);
