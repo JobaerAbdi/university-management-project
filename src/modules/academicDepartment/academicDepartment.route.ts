@@ -8,6 +8,14 @@ const router = express.Router();
 
 router.post('/create-academicDepartment', 
 validateRequest(academicDepartmentValidation.createAcademicDepartmentValidationSchema),
-academicDepartmentControllers.createAcademicDepartmentIntoDB)
+academicDepartmentControllers.createAcademicDepartmentIntoDB);
+
+router.get('/', academicDepartmentControllers.getAllAcademicDepartmentsFromDB);
+
+router.get('/:departmentId', academicDepartmentControllers.getSingleAcademicDepartmentFromDB);
+
+router.patch('/:departmentId', 
+validateRequest(academicDepartmentValidation.updateAcademicDepartmentValidationSchema),
+academicDepartmentControllers.updateAcademicDepartmentIntoDB);
 
 export const academicDepartmentRoutes = router;
