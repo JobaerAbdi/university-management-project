@@ -6,7 +6,9 @@ const validateRequest = (schema: AnyZodObject) => {
     {
   
       try {
-        await schema.parseAsync({ body: req.body });
+        await schema.parseAsync({ 
+          body: req.body 
+        });
         next();
       } catch (error) {
         next(error)
@@ -16,4 +18,6 @@ const validateRequest = (schema: AnyZodObject) => {
   };
 
   export default validateRequest;
+  
+
   

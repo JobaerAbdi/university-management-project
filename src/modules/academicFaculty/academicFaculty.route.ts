@@ -11,7 +11,9 @@ validateRequest(academicFacultyValidations.createAcademicFacultyValidationSchema
 academicFacultyControllers.createAcademicFacultyIntoDB)
 
 router.get('/', academicFacultyControllers.getAllAcademicFacultiesFromDB)
+
 router.get('/:facultyId', academicFacultyControllers.getSingleAcademicFacultyFromDB)
+
 router.patch('/:facultyId',
 validateRequest(academicFacultyValidations.updateAcademicFacultyValidationSchema),
 academicFacultyControllers.updateAcademicFacultyIntoDB)
