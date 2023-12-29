@@ -4,7 +4,12 @@ const getAllStudentsFromDB = async () => {
   const result = await Student.find()
   .populate('user')
   .populate('admissionSemester')
-  .populate('academicDepartment');  // this is chining populate methods.
+  .populate({
+    path: 'academicDepartment',
+    populate: {
+      path: 'academicFaculty'
+    }
+  })
   return result;
 };
 
@@ -12,7 +17,12 @@ const getSingleStudentFromDB = async (id: string) => {
   const result = await Student.findById(id)
   .populate('user')
   .populate('admissionSemester')
-  .populate('academicDepartment');  // this is chining populate methods.
+  .populate({
+    path: 'academicDepartment',
+    populate: {
+      path: 'academicFaculty'
+    }
+  })
   return result;
 };
 
