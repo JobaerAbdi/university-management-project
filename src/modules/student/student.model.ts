@@ -17,7 +17,7 @@ const userNameSchema = new Schema<TUserName>({
   },
   lastName: {
     type: String,
-    //required: true,
+    required: true,
   },
 });
 
