@@ -28,7 +28,23 @@ const getSingleStudentFromDB: RequestHandler = async (req, res,next) => {
   }
 };
 
+
+const deleteStudentFromDB: RequestHandler = async (req, res,next) => {
+  try {
+    const { studentId } = req.params;
+    const result = await studentServices.deleteStudentFromDB(studentId);
+    res.status(201).json({
+      success: true,
+      messages: 'Student is deleted successfully',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const studentControllers = {
   getAllStudentsFromDB,
   getSingleStudentFromDB,
+  deleteStudentFromDB
 };

@@ -137,6 +137,10 @@ const studentSchema = new Schema<TStudent>(
     profileImage: {
       type: String,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,

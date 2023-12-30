@@ -18,6 +18,8 @@ const academicDepartmentSchema = new Schema<TAcademicDepartment>({
 }
 );
 
+
+//  use document middleware for check document before save data in database.
 academicDepartmentSchema.pre('save', async function(next){
     const isDepartmentExists = await AcademicDepartment.findOne(
         {departmentName: this.departmentName}
@@ -29,6 +31,8 @@ academicDepartmentSchema.pre('save', async function(next){
     next()
 });
 
+
+// use query middleware for check query before update data in database.
 academicDepartmentSchema.pre('findOneAndUpdate', async function(next){
     const query = this.getQuery()
     // console.log(query); // _id: '658d2ec877c039bd0c94542c'

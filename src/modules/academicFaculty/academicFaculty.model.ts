@@ -24,7 +24,6 @@ academicFacultySchema.pre('save', async function(next){
     next()
 });
 
-// this is query middleware for using query processing before update data into database.
 academicFacultySchema.pre('findOneAndUpdate', async function(next){
     const query = this.getQuery()
     // console.log(query); // _id: '658e2ef8f280ea8c5e3bf859'
