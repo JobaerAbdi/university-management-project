@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { User } from '../user/user.model';
 import { Student } from './student.model';
-import { string } from 'zod';
+import { TStudent } from './student.interface';
 
 const getAllStudentsFromDB = async () => {
   const result = await Student.find()
@@ -29,6 +29,15 @@ const getSingleStudentFromDB = async (id: string) => {
   return result;
 };
 
+const updateStudentIntoDB = async(id: string, payload: Partial<TStudent>)=>{
+  const result = await Student.findByIdAndUpdate(
+    id,
+    payload,
+    {new: true, runValidators:true}
+  )
+  return result
+};
+
 // ==================================================================
 /*
 const deleteStudentFromDB = async (id: string) => {
@@ -46,20 +55,20 @@ const deleteStudentFromDB = async(id: string)=>{
   const session = await mongoose.startSession();
    try {
     session.startTransaction();
-    const deleteStudent = await Student.findOneAndUpdate(
+    const deletedStudent = await Student.findOneAndUpdate(
       {id},
       {isDeleted: true},
       {new: true, session}
     )
-    if(!deleteStudent){
+    if(!deletedStudent){
       throw new Error('Failed to delete student')
     }
-    const deleteUser = await User.findOneAndUpdate(
+    const deletedUser = await User.findOneAndUpdate(
       {id},
       {isDeleted: true},
       {new: true, session}
     )
-    if(!deleteUser){
+    if(!deletedUser){
       throw new Error('Failed to delete user')
     }
     await session.commitTransaction();
@@ -74,5 +83,6 @@ const deleteStudentFromDB = async(id: string)=>{
 export const studentServices = {
   getAllStudentsFromDB,
   getSingleStudentFromDB,
+  updateStudentIntoDB,
   deleteStudentFromDB,
 };

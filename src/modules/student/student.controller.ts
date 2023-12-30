@@ -29,6 +29,22 @@ const getSingleStudentFromDB: RequestHandler = async (req, res,next) => {
 };
 
 
+const updateStudentIntoDB: RequestHandler = async(req, res, next)=>{
+  try {
+    const {studentId} = req.params
+    const {studentData} = req.body
+    const result = await studentServices.updateStudentIntoDB(studentId, studentData)
+    res.status(200).json({
+    success: true,
+    message: 'Student is update successfully',
+    data: result
+  })
+  } catch (error) {
+    next(error)
+  }
+};
+
+
 const deleteStudentFromDB: RequestHandler = async (req, res,next) => {
   try {
     const { studentId } = req.params;
@@ -46,5 +62,6 @@ const deleteStudentFromDB: RequestHandler = async (req, res,next) => {
 export const studentControllers = {
   getAllStudentsFromDB,
   getSingleStudentFromDB,
+  updateStudentIntoDB,
   deleteStudentFromDB
 };
