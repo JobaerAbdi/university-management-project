@@ -21,7 +21,7 @@ const getSingleStudentFromDB = async (id: string) => {
     .populate('user')
     .populate('admissionSemester')
     .populate({
-      path: 'academicDepartment',
+      path: 'academicDepartment',  // chining and nested populate methods
       populate: {
         path: 'academicFaculty',
       },
@@ -38,13 +38,7 @@ const updateStudentIntoDB = async(id: string, payload: Partial<TStudent>)=>{
 
   if(name && Object.keys(name).length){
     for(const [key, value] of Object.entries(name))
-    //        [firstName, 'Jakir']                
-    //        [middleName, 'hasan']                
-    //        [lastName, 'rakib']  
-    modifiedUpdatedData[`name.${key}`] = value;    
-    //                  name.firstName= 'Jakir'       
-    //                  name.middleName= 'hasan'       
-    //                  name.lastName= 'rakib'       
+    modifiedUpdatedData[`name.${key}`] = value;           
   }
 
 
