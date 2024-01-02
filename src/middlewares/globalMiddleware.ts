@@ -6,7 +6,7 @@ import { ZodError, ZodIssue } from "zod";
 import config from "../config";
 import handleZodError from "../errors/handleZodError";
 import { TErrorSources } from "../interface/error";
-import handleValidationError from "../errors/handleValidationError";
+import handleMongooseValidationError from "../errors/handlemMongooseValidationError";
 
 const globalMiddleWare = ((err: any, req: Request, res: Response, next: NextFunction)=>{
     
@@ -24,7 +24,7 @@ const globalMiddleWare = ((err: any, req: Request, res: Response, next: NextFunc
         message = simplifiedError?.message;
         errorSource = simplifiedError?.errorSource;        
     }else if(err?.name === 'ValidationError'){
-        const simplifiedError = handleValidationError(err);
+        const simplifiedError = handleMongooseValidationError(err);
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         errorSource = simplifiedError?.errorSource;
