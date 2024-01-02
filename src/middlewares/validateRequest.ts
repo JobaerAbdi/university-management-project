@@ -8,8 +8,8 @@ const validateRequest = (schema: AnyZodObject) => {
       try {
         await schema.parseAsync({ body: req.body });
         next();
-      } catch (error) {
-        next(error)
+      } catch (err) {
+        next(err)
       }
       
     };
