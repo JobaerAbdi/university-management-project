@@ -8,6 +8,7 @@ import handleZodError from "../errors/handleZodError";
 import { TErrorSources } from "../interface/error";
 import handleMongooseValidationError from "../errors/handleMongooseValidationError";
 import handleMongooseCastError from "../errors/handleMongooseCastError";
+import handleDuplicateError from "../errors/handleDuplicateError";
 
 const globalMiddleWare = ((err: any, req: Request, res: Response, next: NextFunction)=>{
     
@@ -31,6 +32,12 @@ const globalMiddleWare = ((err: any, req: Request, res: Response, next: NextFunc
         errorSource = simplifiedError?.errorSource;
     }else if(err?.name === 'CastError'){
         const simplifiedError = handleMongooseCastError(err);
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        errorSource = simplifiedError?.errorSource;
+    }
+    else if(err?.code === 11000){
+        const simplifiedError = handleDuplicateError(err);
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         errorSource = simplifiedError?.errorSource;
