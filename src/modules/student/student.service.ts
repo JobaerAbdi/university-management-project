@@ -4,10 +4,7 @@ import { Student } from './student.model';
 import { TStudent } from './student.interface';
 
 const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
-  // console.log(query); // { searchTerm: 'babu', email: 'adnan01@example.com' }
-
   const queryObj = { ...query };
-  console.log(queryObj);
 
   let searchTermValue = '';
   if (query?.searchTerm) {
@@ -20,11 +17,10 @@ const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
     })),
   });
 
-  const excludeFields = ['searchTerm', 'sort', 'limit'];
+  const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
   excludeFields.forEach((elem) => delete queryObj[elem]);
-
-  // console.log(query, queryObj);
-  // { searchTerm: 'babu', email: 'adnan01@example.com' } { email: 'adnan01@example.com' }
+  console.log({query}, {queryObj});
+  
 
   const filterQuery = searchQuery
     .find(queryObj)
@@ -42,11 +38,22 @@ const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
     sort = query.sort as string;
   }
   const sortQuery = filterQuery.sort(sort);
-  let limit = -1
+  let limit = 1
+  let page = 1
+  let skip = 0
+
   if(query.limit){
-    limit = query.limit as number
+    limit = Number(query.limit)
   }
-  const limitQuery = sortQuery.limit(limit);
+
+  if(query?.page){
+    page=Number(query?.page)
+    skip = (page-1)*limit
+  }
+
+  const paginateQuery = sortQuery.skip(skip)
+  
+  const limitQuery = await paginateQuery.limit(limit);
   return limitQuery;
 };
 
