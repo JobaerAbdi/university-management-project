@@ -3,7 +3,8 @@ import { studentServices } from './student.service';
 
 const getAllStudentsFromDB: RequestHandler = async (req, res, next) => {
   try {
-    const result = await studentServices.getAllStudentsFromDB();
+    const query = req.query    
+    const result = await studentServices.getAllStudentsFromDB(query);
     res.status(201).json({
       success: true,
       messages: 'Students are retrieved successfully',
