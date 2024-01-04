@@ -6,6 +6,8 @@ import { Student } from '../student/student.model';
 import { TUser } from './user.interface';
 import { User } from './user.model';
 import { generateStudentId } from './user.utils';
+import { TFaculty } from '../faculty/faculty.interface';
+import { Faculty } from '../faculty/faculty.model';
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   
@@ -42,14 +44,21 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   }
 };
 
-export const userServices = {
-  createStudentIntoDB,
+const createFacultyIntoDB = async(password: string , payload: TFaculty)=>{
+  const session = await startSession()
+  try {
+    session.startTransaction()
+  } catch (error) {
+    
+  }
 };
 
 
- /*
-    const student = new Student(studentData)
-    const result = await student.save()  // => built in instance method
-    return result;
-  */
+
+export const userServices = {
+  createStudentIntoDB,
+  createFacultyIntoDB
+};
+
+
 
