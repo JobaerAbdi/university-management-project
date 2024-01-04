@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import { User } from '../user/user.model';
 import { Student } from './student.model';
 import { TStudent } from './student.interface';
-import QueryBuilder from '../../builder/queryBuilder';
 import { studentSearchableFields } from './student.constant';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
   // const queryObj = { ...query };
@@ -67,7 +67,16 @@ const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
 
   // const fieldQuery = await limitQuery.select(fields)
   // return fieldQuery;
-  const studentQuery = new QueryBuilder(Student.find(), query)
+  const studentQuery = new QueryBuilder(Student.find()
+  .populate("user")
+  .populate("admissionSemester")
+  .populate({
+    path: "academicDepartment",
+    populate: {
+      path: "academicFaculty"
+    }
+  })
+  ,query)
   .search(studentSearchableFields)
   .filter()
   .sort()
