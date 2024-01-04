@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { TFaculty, TName } from "./faculty.interface";
 
 const facultyNameSchema = new Schema<TName>({
@@ -86,3 +86,5 @@ const facultySchema = new Schema<TFaculty>({
 {
     timestamps: true
 });
+
+export const Faculty = model<TFaculty>('Faculty', facultySchema);
