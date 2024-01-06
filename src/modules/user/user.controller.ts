@@ -19,13 +19,14 @@ const createStudentIntoDB: RequestHandler = async (req, res, next) => {
   }
 };
 
-
-//              create faculty
-const createFacultyIntoDB: RequestHandler = async (req, res, next) => {
+const createFaculty: RequestHandler = async (req, res, next) => {
   try {
-    const {password,  facultyData } = req.body;
-    const result = await userServices.createFacultyIntoDB(password , facultyData);
-    res.send(201).json({
+    const { password, faculty: facultyData } = req.body;
+    const result = await userServices.createFacultyIntoDB(
+      password,
+      facultyData,
+    );
+    res.status(200).json({
       success: true,
       message: 'Faculty is created successfully',
       data: result,
@@ -35,7 +36,23 @@ const createFacultyIntoDB: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+const createAdmin: RequestHandler = async (req, res, next) =>{
+  try {
+    const { password, admin: adminData } = req.body;
+    const result = await userServices.createAdminIntoDB(password, adminData);
+    res.status(200).json({
+      success: true,
+      message: 'Admin is created successfully',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const userControllers = {
   createStudentIntoDB,
-  createFacultyIntoDB
+  createFaculty,
+  createAdmin
 };
