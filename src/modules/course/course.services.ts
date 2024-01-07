@@ -38,5 +38,6 @@ export const courseServices = {
     createCourseIntoDB,
     getAllCourseFromDB,
     getSingleCourseFromDB,
+    // updateCourseIntoDB
     deleteCourseFromDB
 };
