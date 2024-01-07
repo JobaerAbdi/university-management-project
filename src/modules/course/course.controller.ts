@@ -17,7 +17,8 @@ const createCourse: RequestHandler = async (req, res, next) => {
 
 const getAllCourse: RequestHandler = async (req, res, next) => {
   try {
-    const result = await courseServices.getAllCourseFromDB()
+    const query = req.query
+    const result = await courseServices.getAllCourseFromDB(query)
     res.status(200).json({
       success: true,
       message: 'All course are retrieved successfully',
@@ -30,8 +31,8 @@ const getAllCourse: RequestHandler = async (req, res, next) => {
 
 const getSingleCourse: RequestHandler = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const result = await courseServices.getSingleCourseFromDB(id);
+    const { courseId } = req.params
+    const result = await courseServices.getSingleCourseFromDB(courseId)
     res.status(200).json({
       success: true,
       message: 'Single course is retrieved successfully',
@@ -68,7 +69,7 @@ const deleteCourse: RequestHandler = async (req, res, next) => {
       data: result,
     });
   } catch (err) {
-    next(err);
+    next(err)
   }
 };
 

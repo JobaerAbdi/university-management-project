@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const preRequisiteCourseSchema  = z.object({
-    course: z.string()
+    course: z.string().optional()
 })
 
 const createCourseValidationSchema = z.object({
@@ -23,7 +23,7 @@ const createCourseValidationSchema = z.object({
         required_error: 'Credits is required',
         invalid_type_error: 'Credits must be a number'
       }),
-      preRequisiteCourses: z.array(preRequisiteCourseSchema)
+      preRequisiteCourses: z.array(preRequisiteCourseSchema).optional()
     }),
   }),
 });
