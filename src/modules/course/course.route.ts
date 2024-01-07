@@ -9,5 +9,11 @@ router.post('/create-course',
 validateRequest(courseValidations.createCourseValidationSchema),
 courseControllers.createCourse);
 
+router.get('/', courseControllers.getAllCourse);
+
+router.get('/:courseId', courseControllers.getSingleCourse);
+
+router.delete('/:courseId', courseControllers.deleteCourse);
+
 
 export const courseRoutes = router;

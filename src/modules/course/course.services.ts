@@ -25,7 +25,7 @@ const updateCourseIntoDB = async(id: string, payload: Partial<TCourse>)=>{
     return result
 };
 */
-const deleteCourseIntoDB = async(id: string)=>{
+const deleteCourseFromDB = async(id: string)=>{
     const result = await Course.findByIdAndUpdate(
         id,
         {isDeleted: true},
@@ -38,5 +38,5 @@ export const courseServices = {
     createCourseIntoDB,
     getAllCourseFromDB,
     getSingleCourseFromDB,
-    deleteCourseIntoDB
+    deleteCourseFromDB
 };
