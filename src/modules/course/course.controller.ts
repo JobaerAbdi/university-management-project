@@ -42,22 +42,22 @@ const getSingleCourse: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-/*
+
 const updateCourse: RequestHandler = async (req, res, next) => {
   try {
-    const { id } = req.params
+    const { courseId } = req.params
     const {courseData} = req.body
-    const result = await courseServices.getSingleCourseFromDB(id, courseData);
+    const result = await courseServices.updateCourseIntoDB(courseId, courseData);
     res.status(200).json({
       success: true,
-      message: 'Single course is retrieved successfully',
+      message: 'Course is updated successfully',
       data: result,
     });
   } catch (err) {
     next(err);
   }
 };
-*/
+
 
 const deleteCourse: RequestHandler = async (req, res, next) => {
   try {
@@ -77,6 +77,6 @@ export const courseControllers = {
   createCourse,
   getAllCourse,
   getSingleCourse,
-  // updateCourse
+  updateCourse,
   deleteCourse,
 };
