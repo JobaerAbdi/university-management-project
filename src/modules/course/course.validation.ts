@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 const preRequisiteCourseSchema  = z.object({
-    course: z.string().optional()
+    course: z.string().optional(),
+    isDeleted: z.boolean().optional()
 })
 
 const createCourseValidationSchema = z.object({
@@ -23,7 +24,8 @@ const createCourseValidationSchema = z.object({
         required_error: 'Credits is required',
         invalid_type_error: 'Credits must be a number'
       }),
-      preRequisiteCourses: z.array(preRequisiteCourseSchema).optional()
+      preRequisiteCourses: z.array(preRequisiteCourseSchema).optional(),
+      isDeleted: z.boolean().optional()
     }),
   }),
 });
@@ -33,7 +35,8 @@ const createCourseValidationSchema = z.object({
 
 
 const updatePreRequisiteCourseSchema  = z.object({
-    course: z.string().optional()
+    course: z.string().optional(),
+    isDeleted: z.boolean().optional()
 })
 
 const updateCourseValidationSchema = z.object({
@@ -55,7 +58,8 @@ const updateCourseValidationSchema = z.object({
         required_error: 'Credits is required',
         invalid_type_error: 'Credits must be a number'
       }).optional(),
-      preRequisiteCourses: z.array(updatePreRequisiteCourseSchema).optional()
+      preRequisiteCourses: z.array(updatePreRequisiteCourseSchema).optional(),
+      isDeleted: z.boolean().optional()
     }),
   }),
 });
