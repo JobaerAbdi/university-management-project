@@ -24,13 +24,19 @@ const getSingleCourseFromDB = async(id: string)=>{
     return result
 };
 
-const updateCourseIntoDB = async(id: string, payload: Partial<TCourse>)=>{
-    const result = await Course.findByIdAndUpdate(
-        id,
-        {payload},
-        {new: true, runValidators: true}
+const updateCourseIntoDB = async(id: string, payload: Partial<TCourse>)=>{    
+   const {preRequisiteCourses, ...remainingBasicCourseData} = payload
+   console.log(preRequisiteCourses);
+   console.log(remainingBasicCourseData);
+   const updateBasicCourseData = await Course.findByIdAndUpdate(
+    id,
+    remainingBasicCourseData
     )
-    return result
+    if(preRequisiteCourses && preRequisiteCourses?.length > 0){
+        const deletePreRequisiteCourses = preRequisiteCourses.filter(element=>element.course && element.isDeleted)
+        console.log(deletePreRequisiteCourses); 
+    }
+    return updateBasicCourseData
 };
 
 const deleteCourseFromDB = async(id: string)=>{

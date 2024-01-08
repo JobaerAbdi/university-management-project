@@ -47,6 +47,8 @@ const updateCourse: RequestHandler = async (req, res, next) => {
   try {
     const { courseId } = req.params
     const {courseData} = req.body
+    // console.log(courseId, courseData);
+    
     const result = await courseServices.updateCourseIntoDB(courseId, courseData);
     res.status(200).json({
       success: true,
