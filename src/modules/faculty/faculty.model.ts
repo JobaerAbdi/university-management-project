@@ -44,7 +44,7 @@ const facultySchema = new Schema<TFaculty, FacultyModel>(
     },
     gender: {
       type: String,
-      enum: {
+      enum: { 
         values: Gender,
         message: '{VALUE} is not a valid gender',
       },

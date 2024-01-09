@@ -40,10 +40,11 @@ const updateFacultyIntoDB = async (id: string, payload: Partial<TFaculty>) => {
     }
   }
 
-  const result = await Faculty.findByIdAndUpdate(id, modifiedUpdatedData, {
-    new: true,
-    runValidators: true,
-  });
+  const result = await Faculty.findByIdAndUpdate(
+    id, 
+    modifiedUpdatedData, 
+    {new: true, runValidators: true}
+  )
   return result;
 };
 
@@ -56,7 +57,7 @@ const deleteFacultyFromDB = async (id: string) => {
     const deletedFaculty = await Faculty.findByIdAndUpdate(
       id,
       { isDeleted: true },
-      { new: true, session },
+      { new: true, session }
     );
 
     if (!deletedFaculty) {
