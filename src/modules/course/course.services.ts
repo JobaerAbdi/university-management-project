@@ -24,32 +24,43 @@ const getSingleCourseFromDB = async(id: string)=>{
     return result
 };
 
+
 const updateCourseIntoDB = async(id: string, payload: Partial<TCourse>)=>{
-    const {preRequisiteCourses, ...basicCourseData} = payload
-    const updateBasicCourseData = await Course.findByIdAndUpdate(
+    const {preRequisiteCourses, ...remainingData} = payload
+    console.log(preRequisiteCourses);
+    // [ { course: '659b72e680654fb8287b1aed', isDeleted: true }, { course: '659b754f80654fb8287bf', isDeleted: false } ]
+    console.log(remainingData);
+    // { title: 'Cascading Cascading Style Sheet', credits: 19 }
+
+    const updateBasicData = await Course.findByIdAndUpdate(
         id,
-        basicCourseData,
+        remainingData,
         {new: true, runValidators: true}
     )
+
     if(preRequisiteCourses && preRequisiteCourses?.length > 0){
-        const deletePreRequisites = preRequisiteCourses.filter(element=> element.course && element.isDeleted)
-        const deletePreRequisitesId = deletePreRequisites.map(ele=> ele.course)
+        const deletePreRequisite = preRequisiteCourses.filter(element=> element.course && element.isDeleted)
+        console.log(deletePreRequisite); 
+        // [ { course: '659b72e680654fb8287b1aed', isDeleted: true } ]
+        const deletePreRequisiteId = deletePreRequisite.map(element=> element.course)
+        console.log(deletePreRequisiteId); 
+        // [ '659b72e680654fb8287b1aed' ]
+
         await Course.findByIdAndUpdate(
             id,
             {
                 $pull: {
                     preRequisiteCourses: {
                         course: {
-                            $in: deletePreRequisitesId
-                            
+                            $in: deletePreRequisiteId
                         }
                     }
                 }
             }
         )
+        
     }
-    return updateBasicCourseData
-
+    return updateBasicData;
 }
 
 
