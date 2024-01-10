@@ -10,6 +10,10 @@ const preRequisiteCoursesSchema = new Schema<TPreRequisiteCourses>({
     type: Boolean,
     default: false
    }
+},
+{
+    _id: false,
+    timestamps: true
 });
 
 const courseSchema = new Schema<TCourse>({
@@ -35,6 +39,9 @@ const courseSchema = new Schema<TCourse>({
         type: Boolean,
         default: false
     }
+},
+{
+    timestamps: true
 });
 
 
