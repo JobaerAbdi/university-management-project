@@ -64,7 +64,18 @@ const updateCourseValidationSchema = z.object({
   }),
 });
 
+//====================================================================
+
+// Faculties are includes in individual course and this is courseFaculty validation schema.
+
+const courseFacultyValidationSchema  = z.object({
+  body: z.object({
+    faculties: z.array(z.string())
+  })
+});
+
 export const courseValidations = {
   createCourseValidationSchema,
-  updateCourseValidationSchema
+  updateCourseValidationSchema,
+  courseFacultyValidationSchema
 };

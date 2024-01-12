@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import QueryBuilder from "../../builder/QueryBuilder";
 import { courseSearchableFields } from "./course.constant";
-import { TCourse } from "./course.interface";
-import { Course } from "./course.model"
+import { TCourse, TCourseFaculty } from "./course.interface";
+import { Course, CourseFaculty } from "./course.model"
 
 const createCourseIntoDB = async(payload: TCourse)=>{
     const result = await Course.create(payload)
@@ -98,6 +98,26 @@ const updateCourseIntoDB = async(id: string, payload: Partial<TCourse>)=>{
 };
 
 
+const assignFacultiesWithCourseIntoDB = async(id: string, payload: Partial<TCourseFaculty>)=>{
+    const result  = await CourseFaculty.findByIdAndUpdate(
+        id,
+        {
+            course: id,
+            $addToSet:{
+                faculties: {
+                    $each: payload
+                }
+            }
+        },
+        {
+            upsert: true,
+            new: true
+        }
+    )
+    return result
+};
+
+
 
 const deleteCourseFromDB = async(id: string)=>{
     const result = await Course.findByIdAndUpdate(
@@ -113,5 +133,6 @@ export const courseServices = {
     getAllCourseFromDB,
     getSingleCourseFromDB,
     updateCourseIntoDB,
+    assignFacultiesWithCourseIntoDB,
     deleteCourseFromDB
 };
