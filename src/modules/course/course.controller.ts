@@ -74,6 +74,20 @@ const assignFacultiesWithCourse: RequestHandler = async(req, res, next)=>{
     next(err)
   }
 }
+const removeFacultiesFromCourse: RequestHandler = async(req, res, next)=>{
+  try {
+    const {courseId} = req.params
+    const {faculties} = req.body
+    const result = await courseServices.removeFacultiesFromCourse(courseId, faculties)
+    res.status(200).json({
+      success: true,
+      message: "faculties are remove successfully",
+      data: result
+    })
+  } catch (err) {
+    next(err)
+  }
+}
 
 
 const deleteCourse: RequestHandler = async (req, res, next) => {
@@ -96,5 +110,6 @@ export const courseControllers = {
   getSingleCourse,
   updateCourse,
   assignFacultiesWithCourse,
+  removeFacultiesFromCourse,
   deleteCourse,
 };
