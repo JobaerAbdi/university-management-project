@@ -1,7 +1,7 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { TSemesterRegistration } from "./semesterRegistration.interface";
+import { semesterRegistrationStatus } from "./semesterRegistration.constant";
 
-const statusType = ['UPCOMING' ,'ONGOING' ,'ENDED'];
 
 const semesterRegistrationSchema = new Schema<TSemesterRegistration>({
     academicSemester: {
@@ -12,22 +12,28 @@ const semesterRegistrationSchema = new Schema<TSemesterRegistration>({
     },
     status: {
         type: String,
-        enum: statusType,
-        required: true
+        enum: semesterRegistrationStatus,
+        default: 'UPCOMING'
     },
     startDate: {
-        type: ,
+        type: Date,
+        required: true
     },
     endDate: {
-        type: ,
+        type: Date,
+        required: true
     },
     minCredit:{
-        type: ,
+        type: Number,
+        default: 3
     },
     maxCredit: {
-        type: ,
+        type: Number,
+        default: 15
     },
 },
 {
     timestamps: true,
 });
+
+export const SemesterRegistration = model<TSemesterRegistration>('SemesterRegistration', semesterRegistrationSchema);
