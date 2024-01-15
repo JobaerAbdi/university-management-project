@@ -9,7 +9,9 @@ router.post('/create-semesterRegistration',
 validateRequest(semesterRegistrationValidations.createSemesterRegistrationValidationSchema),
 semesterRegistrationControllers.createSemesterRegistration);
 
-router.get('/', semesterRegistrationControllers.getAllSemesterRegistration)
+router.get('/', semesterRegistrationControllers.getAllSemesterRegistration);
+
+router.get('/:registrationId', semesterRegistrationControllers.getSingleSemesterRegistration);
 
 
 export const semesterRegistrationRoutes = router;
