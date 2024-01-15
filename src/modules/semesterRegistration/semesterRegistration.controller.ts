@@ -3,8 +3,8 @@ import { semesterRegistrationServices } from "./semesterRegistration.service";
 
 const createSemesterRegistration: RequestHandler = async(req,res,next)=>{
     try {
-        const {academicSemester} = req.body
-    const  result = await semesterRegistrationServices.createSemesterRegistrationIntoDB(academicSemester)
+        const {semesterRegistration} = req.body
+    const  result = await semesterRegistrationServices.createSemesterRegistrationIntoDB(semesterRegistration)
     res.status(200).json({
         success: true,
         message: 'Semester registration is successful',
