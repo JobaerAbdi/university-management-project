@@ -23,7 +23,13 @@ const createSemesterRegistrationIntoDB = async(payload: TSemesterRegistration)=>
 };
 
 
+const getAllSemesterRegistrationFromDB = async()=>{
+    const result = await SemesterRegistration.find().populate('academicSemester')
+    return result
+};
+
 
 export const semesterRegistrationServices = {
     createSemesterRegistrationIntoDB,
+    getAllSemesterRegistrationFromDB,
 };
