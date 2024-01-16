@@ -7,6 +7,17 @@ const createSemesterRegistrationIntoDB = async(payload: TSemesterRegistration)=>
     const academicSemester = payload?.academicSemester
     // console.log(academicSemester);
 
+    const isUpcomingOrOngoingSemesterExists = await SemesterRegistration.findOne(
+        {
+            $or: [
+                {status: 'UPCOMING'},
+                {status: 'ONGOING'}
+            ]
+        }
+    )
+    if(isUpcomingOrOngoingSemesterExists){
+        throw new Error(`${isUpcomingOrOngoingSemesterExists.status} semester is all ready exists`)
+    }
     const isAcademicSemesterExists = await AdmissionSemester.findById(academicSemester)
     // console.log(isAcademicSemesterExists);
     if(!isAcademicSemesterExists){
@@ -50,7 +61,6 @@ const updateSemesterRegistrationIntoDB = async(id: string, payload: Partial<TSem
             new: true,
             runValidators: true
         }
-
     )
     return result
 };
