@@ -13,5 +13,9 @@ router.get('/', semesterRegistrationControllers.getAllSemesterRegistration);
 
 router.get('/:registrationId', semesterRegistrationControllers.getSingleSemesterRegistration);
 
+router.patch('/:registrationId',
+validateRequest(semesterRegistrationValidations.updateSemesterRegistrationValidationSchema),
+semesterRegistrationControllers.updateSemesterRegistrationIntoDB);
+
 
 export const semesterRegistrationRoutes = router;

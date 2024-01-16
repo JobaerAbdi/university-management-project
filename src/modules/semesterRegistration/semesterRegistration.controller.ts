@@ -4,10 +4,7 @@ import { semesterRegistrationServices } from './semesterRegistration.service';
 const createSemesterRegistration: RequestHandler = async (req, res, next) => {
   try {
     const { semesterRegistration } = req.body;
-    const result =
-      await semesterRegistrationServices.createSemesterRegistrationIntoDB(
-        semesterRegistration,
-      );
+    const result = await semesterRegistrationServices.createSemesterRegistrationIntoDB(semesterRegistration);
     res.status(200).json({
       success: true,
       message: 'Semester registration is successful',
@@ -20,8 +17,8 @@ const createSemesterRegistration: RequestHandler = async (req, res, next) => {
 
 const getAllSemesterRegistration: RequestHandler = async (req, res, next) => {
   try {
-    const result =
-      await semesterRegistrationServices.getAllSemesterRegistrationFromDB();
+    const query = req.query
+    const result = await semesterRegistrationServices.getAllSemesterRegistrationFromDB(query);
     res.status(200).json({
       success: true,
       message: 'All semester Registration retrieved successfully',
@@ -49,8 +46,26 @@ const getSingleSemesterRegistration: RequestHandler = async (req,res,next) => {
   }
 };
 
+
+const updateSemesterRegistrationIntoDB: RequestHandler = async(req,res,next)=>{
+  try {
+    const {registrationId} = req.params
+  const {semesterRegistration} = req.body
+  const result = await semesterRegistrationServices.updateSemesterRegistrationIntoDB(registrationId, semesterRegistration)
+  res.status(200).json({
+    success: true,
+    message: 'Semester Registration updated successfully',
+    data: result
+  })
+  } catch (err) {
+    next(err)
+  }
+}
+
+
 export const semesterRegistrationControllers = {
   createSemesterRegistration,
   getAllSemesterRegistration,
   getSingleSemesterRegistration,
+  updateSemesterRegistrationIntoDB
 };
