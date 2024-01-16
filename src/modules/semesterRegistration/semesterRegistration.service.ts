@@ -15,9 +15,12 @@ const createSemesterRegistrationIntoDB = async(payload: TSemesterRegistration)=>
             ]
         }
     )
+    
     if(isUpcomingOrOngoingSemesterExists){
-        throw new Error(`${isUpcomingOrOngoingSemesterExists.status} semester is all ready exists`)
+        throw new Error('UPCOMING or ONGOING semester is all ready exists')
     }
+
+    
     const isAcademicSemesterExists = await AdmissionSemester.findById(academicSemester)
     // console.log(isAcademicSemesterExists);
     if(!isAcademicSemesterExists){
@@ -54,6 +57,16 @@ const getSingleSemesterRegistrationFromDB = async(id: string)=>{
 };
 
 const updateSemesterRegistrationIntoDB = async(id: string, payload: Partial<TSemesterRegistration>)=>{
+    const isSemesterRegistrationExists = await SemesterRegistration.findById(id)
+
+    if(!isSemesterRegistrationExists){
+        throw new Error('This semester does not exists')
+    }
+    
+    if(isSemesterRegistrationExists?.status === 'ENDED'){
+        throw new Error (`This semester is ${isSemesterRegistrationExists?.status} and totally closed`)
+    }
+    
     const result = await SemesterRegistration.findByIdAndUpdate(
         id,
         payload,
