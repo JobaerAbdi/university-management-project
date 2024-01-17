@@ -58,13 +58,22 @@ const getSingleSemesterRegistrationFromDB = async(id: string)=>{
 
 const updateSemesterRegistrationIntoDB = async(id: string, payload: Partial<TSemesterRegistration>)=>{
     const isSemesterRegistrationExists = await SemesterRegistration.findById(id)
+    const requestedStatus = payload?.status
 
     if(!isSemesterRegistrationExists){
         throw new Error('This semester does not exists')
     }
     
     if(isSemesterRegistrationExists?.status === 'ENDED'){
-        throw new Error (`This semester is ${isSemesterRegistrationExists?.status} and totally closed`)
+        throw new Error (`This semester is ENDED and it's totally closed`)
+    }
+
+    if(isSemesterRegistrationExists?.status === 'UPCOMING' && requestedStatus === 'ENDED'){
+        throw new Error (`You can not directly change status from UPCOMING to ENDED`)
+    }
+
+    if(isSemesterRegistrationExists?.status === 'ONGOING' && requestedStatus === 'UPCOMING'){
+        throw new Error (`You can not directly change status from ONGOING to UPCOMING`)
     }
     
     const result = await SemesterRegistration.findByIdAndUpdate(
