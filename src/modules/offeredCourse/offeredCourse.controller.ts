@@ -15,3 +15,6 @@ const createOfferedCourse:RequestHandler = async(req,res,next)=>{
     }
 };
 
+export const offeredCourseControllers = {
+    createOfferedCourse
+};
