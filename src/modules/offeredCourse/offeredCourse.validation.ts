@@ -21,15 +21,9 @@ export const createOfferedCourseSchemaValidation = z.object({
 
 export const updateOfferedCourseSchemaValidation = z.object({
     body: z.object({
-        offeredCourse: z.object({
-            semesterRegistration : z.string().optional(),
-            admissionSemester: z.string().optional(),
-            academicFaculty: z.string().optional(), 
-            academicDepartment: z.string().optional(), 
-            course: z.string().optional(), 
+        offeredCourse: z.object({ 
             faculty: z.string().optional(),
             maxCapacity: z.number().optional(),
-            section: z.number().optional(),
             days: z.enum([...days] as [string, ...string[]]).optional(),
             startTime: z.string().optional(),
             endTime: z.string().optional()
