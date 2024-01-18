@@ -1,5 +1,6 @@
 import QueryBuilder from "../../builder/QueryBuilder";
 import { AdmissionSemester } from "../admissionSemester/admissionSemester.model";
+import { registration } from "./semesterRegistration.constant";
 import { TSemesterRegistration } from "./semesterRegistration.interface";
 import { SemesterRegistration } from "./semesterRegistration.model";
 
@@ -64,15 +65,15 @@ const updateSemesterRegistrationIntoDB = async(id: string, payload: Partial<TSem
         throw new Error('This semester does not exists')
     }
     
-    if(isSemesterRegistrationExists?.status === 'ENDED'){
+    if(isSemesterRegistrationExists?.status === registration.ENDED){
         throw new Error (`This semester is ENDED and it's totally closed`)
     }
 
-    if(isSemesterRegistrationExists?.status === 'UPCOMING' && requestedStatus === 'ENDED'){
+    if(isSemesterRegistrationExists?.status === registration.UPCOMING && requestedStatus === registration.ENDED){
         throw new Error (`You can not directly change status from UPCOMING to ENDED`)
     }
 
-    if(isSemesterRegistrationExists?.status === 'ONGOING' && requestedStatus === 'UPCOMING'){
+    if(isSemesterRegistrationExists?.status === registration.ONGOING && requestedStatus === registration.UPCOMING){
         throw new Error (`You can not directly change status from ONGOING to UPCOMING`)
     }
     
