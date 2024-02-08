@@ -23,7 +23,7 @@ export const updateOfferedCourseSchemaValidation = z.object({
         offeredCourse: z.object({ 
             faculty: z.string().optional(),
             maxCapacity: z.number().optional(),
-            days: z.enum([...days] as [string, ...string[]]).optional(),
+            days:z.array(z.enum([...days] as [string, ...string[]])).optional(),
             startTime: z.string().optional(),
             endTime: z.string().optional()
         })
